@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-start-doing-application
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    path: start-doing-chart
+    repoURL: https://github.com/Virgin28/GitOps
+    targetRevision: main
+    helm:
+      valueFiles: 
+        - values.yaml
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: argocd  
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
