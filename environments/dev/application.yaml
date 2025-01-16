@@ -5,21 +5,23 @@ metadata:
   namespace: argocd
 spec:
   project: default
+
   sources:
-    - repoURL: https://github.com/Virgin28/GitOps-ArgoCD.git
-      targetRevision: main
-      ref: values
-      path: environments/dev  # This is where your override values are
-    - repoURL: https://github.com/Virgin28/GitOps.git
-      targetRevision: main
-      path: start-doing-chart  # This contains your Helm chart and default values
-      helm:
-        valueFiles:
-          - $values/values.yaml  # This references the values from the first source
-  destination:
-    server: 'https://kubernetes.default.svc'
-    namespace: argocd
+  - repoURL: https://github.com/Virgin28/GitOps-ArgoCD.git
+    targetRevision: HEAD
+    ref: values
+  - repoURL: https://github.com/Virgin28/GitOps.git
+    targetRevision: HEAD
+    path: start-doing-chart  # Path to your Helm chart in the GitOps repo
+    helm:
+      valueFiles: 
+        - $values/environments/dev/values.yaml
+  destination: 
+    server: https://kubernetes.default.svc
+    namespace: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

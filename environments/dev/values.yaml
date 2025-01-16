@@ -1,26 +1,4 @@
-# environment/dev/values.yaml
-
-frontend:
-  name: frontend
-  imageRepo: 058264364931.dkr.ecr.us-east-1.amazonaws.com/gitops:std-front
-  rdsEndpoint: gitops.c38gmiao0snn.us-east-1.rds.amazonaws.com
-  port: 80
-  replicas: 1
-
-backend:
-  name: backend
-  imageRepo: 058264364931.dkr.ecr.us-east-1.amazonaws.com/gitops:std-back
-  port: 5001
-  replicas: 1
-
-global:
-  domain: bokertovmatoki.online
-  ingressClassName: nginx
-  chart:
-  repo: https://github.com/Virgin28/GitOps
-  targetRevision: main
-  environment: dev
-
+replicaCount: 1
 
 service:
   type: NodePort
@@ -29,4 +7,35 @@ rds:
   host: gitops.c38gmiao0snn.us-east-1.rds.amazonaws.com
   name: gitops
 
+  # Common values
+global:
+  name: GitOps
+  environment: dev
+  domain: bokertovmatoki.online
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+  projectRepoURL: https://github.com/Virgin28/GitOps.git
+  targetRevision: main
+
+  imagePullSecrets:
+    - name: rds-external-access
   
+# Frontend configuration
+image:
+  frontend:
+    name: frontend
+    repository: 058264364931.dkr.ecr.us-east-1.amazonaws.com/gitops:std-front
+    port: 80
+    
+  backend:
+    name: backend
+    imageRepo: 058264364931.dkr.ecr.us-east-1.amazonaws.com/gitops:std-back
+    port: 5001
+
+ingress:
+  enabled: true
+  className: nginx
+      
