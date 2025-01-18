@@ -27,12 +27,12 @@ global:
 image:
   frontend:
     name: frontend
-    repository: 058264364931.dkr.ecr.us-east-1.amazonaws.com/gitops:std-front
+    repository: 058264364931.dkr.ecr.us-east-1.amazonaws.com/gitops:FRONT-04c34fd15d4f1fde809b4fce8c673bf55759b8d1
     port: 80
     
   backend:
     name: backend
-    imageRepo: 058264364931.dkr.ecr.us-east-1.amazonaws.com/gitops:std-back
+    imageRepo: 058264364931.dkr.ecr.us-east-1.amazonaws.com/gitops:BACK-04c34fd15d4f1fde809b4fce8c673bf55759b8d1
     port: 5001
 
 ingress:
