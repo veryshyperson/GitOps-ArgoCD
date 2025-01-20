@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-start-doing-application
+  namespace: argocd
+spec:
+  project: default
+
+  sources:
+  - repoURL: https://github.com/Virgin28/GitOps-ArgoCD.git
+    targetRevision: HEAD
+    ref: values
+  - repoURL: https://github.com/Virgin28/GitOps.git
+    targetRevision: HEAD
+    path: start-doing-chart  # Path to your Helm chart in the GitOps repo
+    helm:
+      valueFiles: 
+        - $values/environments/dev/values.yaml
+  destination: 
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
