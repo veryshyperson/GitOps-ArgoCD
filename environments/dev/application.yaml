@@ -12,7 +12,7 @@ spec:
     ref: values
   - repoURL: https://github.com/Virgin28/GitOps.git
     targetRevision: HEAD
-    path: start-doing-chart  # Path to your Helm chart in the GitOps repo
+    path: start-doing-chart
     helm:
       valueFiles: 
         - $values/environments/dev/values.yaml
