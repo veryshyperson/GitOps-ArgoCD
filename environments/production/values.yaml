@@ -1,4 +1,4 @@
-replicaCount: 3
+replicaCount: 1
 
 service:
   type: NodePort
@@ -11,7 +11,7 @@ rds:
 global:
   name: GitOps
   environment: dev
-  domain: bokertovmatoki.online
+  domain: haredi.net
 
   destination:
     server: https://kubernetes.default.svc
@@ -27,12 +27,12 @@ global:
 image:
   frontend:
     name: frontend
-    repository: 058264364931.dkr.ecr.us-east-1.amazonaws.com/gitops:FRONT-1048dc5832dbcb51a9abb3b09f0747224cf9b411
+    repository: 058264364931.dkr.ecr.us-east-1.amazonaws.com/gitops:FRONT-426f514
     port: 80
     
   backend:
     name: backend
-    repository: 058264364931.dkr.ecr.us-east-1.amazonaws.com/gitops:BACK-1048dc5832dbcb51a9abb3b09f0747224cf9b411
+    repository: 058264364931.dkr.ecr.us-east-1.amazonaws.com/gitops:BACK-426f514
     port: 5001
 
 ingress:

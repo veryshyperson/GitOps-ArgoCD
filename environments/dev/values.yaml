@@ -11,7 +11,7 @@ rds:
 global:
   name: GitOps
   environment: dev
-  domain: bokertovmatoki.online
+  domain: haredi.net
 
   destination:
     server: https://kubernetes.default.svc
